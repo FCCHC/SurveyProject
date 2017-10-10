@@ -6,6 +6,7 @@ from .models import UserData,Country,State,City
 from .serializers import UserDataSerializer,CountrySerializer,StateSerializer,CitySerializer
 # Create your views here.
 
+
 class UserDataList(generics.ListCreateAPIView):
     """
     List all user data
@@ -33,9 +34,10 @@ class StateList(generics.ListCreateAPIView):
     serializer_class = StateSerializer
 
 
- class CityList(generics.ListCreateAPIView):
-     """
-     List all cities
-     """
+class CityList(generics.ListCreateAPIView):
+    """
+    List all cities
+    """
 
-     queryset =
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
