@@ -1,27 +1,39 @@
 from rest_framework import serializers
 
-from .models import UserData,Country,State,City
+from .models import UserData, Country, State, City, Question, Answer
 
 
 class UserDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserData
-        fields = ('name', 'gender', 'age', 'date_of_birth', 'phone', 'email')
+        fields = "__all__"
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = "__all__"
+
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = "__all__"
 
 
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Country
-        fields = ('name', 'country')
+        fields = "__all__"
 
 
 class StateSerializer(serializers.ModelSerializer):
     class Meta:
         model = State
-        fields = ('name', 'state')
+        fields = "__all__"
 
 
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
-        fields = ('name', 'city')
+        fields = "__all__"

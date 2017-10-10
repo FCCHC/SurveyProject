@@ -17,16 +17,26 @@ class UserData (models.Model):
     email = models.EmailField(max_length=254)
 
 
+class Question(models.Model):
+    user = models.ForeignKey(UserData)
+    question = models.CharField(max_length=500)
+
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question)
+    answer = models.CharField(max_length=500)
+
+
 class Country(models.Model):
-    name = models.ForeignKey(UserData)
+    user = models.ForeignKey(UserData)
     country = models.CharField(max_length=100)
 
 
 class State(models.Model):
-    name = models.ForeignKey(Country)
+    country = models.ForeignKey(Country)
     state = models.CharField(max_length=100)
 
 
 class City(models.Model):
-    name = models.ForeignKey(State)
+    state = models.ForeignKey(State)
     city = models.CharField(max_length=100)
