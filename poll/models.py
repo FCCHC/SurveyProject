@@ -15,9 +15,27 @@ class UserData (models.Model):
     date_of_birth = models.DateField()
     phone = models.BigIntegerField()
     email = models.EmailField(max_length=254)
+    school = models.CharField(max_length=500, blank=True)
+    parent = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
+
+
+class ParentData(models.Model):
+    user = models.ForeignKey(UserData)
+    Parent = (
+        ('M', 'MAMÁ'),
+        ('P', 'PAPÁ'),
+    )
+
+    parent = models.CharField(max_length=1, choices=Parent)
+    name = models.CharField(max_length=500)
+    phone = models.BigIntegerField()
+    email = models.EmailField(max_length=254)
+
+    def __str__(self):
+        return self.parent
 
 
 class Question(models.Model):
@@ -58,3 +76,40 @@ class City(models.Model):
 
     def __str__(self):
         return self.city
+
+
+class SourceInfo(models.Model):
+    user = models.ForeignKey(UserData)
+    Source = (
+        ('RS', 'Redes Sociales'),
+        ('W', 'Whatsapp'),
+        ('C', 'Correo'),
+        ('L', 'Llamada'),
+        ('F', 'Folleto'),
+    )
+
+    source = models.CharField(max_length=2, choices=Source)
+
+    def __str__(self):
+        return self.source
+
+
+class Programs(models.Model):
+    user = models.ForeignKey(UserData)
+    Program = (
+        ('EV', 'Europa VIP'),
+        ('EL', 'Europa Lujo'),
+        ('ECH', 'Europa Chic'),
+        ('ECHL', 'Europa Chic + Londres'),
+        ('OM', 'Orlando & Miami'),
+        ('OMH', 'Orlando & Miami+Harmony'),
+        ('JCH', 'Japón&China'),
+    )
+
+    program = models.CharField(max_length=4, choices=Program)
+
+    def __str__(self):
+        return self.program
+
+
+

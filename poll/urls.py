@@ -12,4 +12,7 @@ urlpatterns = [
     url(r'^cityList/$', CityList.as_view()),
     url(r'^questionList/$', QuestionList.as_view()),
     url(r'^answerList/$', AnswerList.as_view()),
+    url(r'^parentList/$', ParentList.as_view()),
+    url(r'^sourceList/$',SourceList.as_view()),
+    url(r'^programList/$', ProgramList.as_view()),
 ]

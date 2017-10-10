@@ -2,8 +2,9 @@ from django.shortcuts import render
 
 from rest_framework import generics
 
-from .models import UserData, Country, State,City, Question, Answer
-from .serializers import UserDataSerializer, CountrySerializer, StateSerializer, CitySerializer, QuestionSerializer, AnswerSerializer
+from .models import UserData, Country, State,City, Question, Answer, ParentData, SourceInfo, Programs
+from .serializers import UserDataSerializer, CountrySerializer, StateSerializer, CitySerializer, \
+    QuestionSerializer, AnswerSerializer, ParentDataSerializer, SourceInfoSerializer, ProgramsSerializer
 # Create your views here.
 
 
@@ -59,3 +60,26 @@ class CityList(generics.ListCreateAPIView):
     queryset = City.objects.all()
     serializer_class = CitySerializer
 
+
+class ParentList(generics.ListCreateAPIView):
+    """
+    List parent data
+    """
+    queryset = ParentData.objects.all()
+    serializer_class = ParentDataSerializer
+
+
+class SourceList(generics.ListCreateAPIView):
+    """
+    List all sources
+    """
+    queryset = SourceInfo.objects.all()
+    serializer_class = SourceInfoSerializer
+
+
+class ProgramList(generics.ListCreateAPIView):
+    """
+    List programs
+    """
+    queryset = Programs.objects.all()
+    serializer_class = ProgramsSerializer
