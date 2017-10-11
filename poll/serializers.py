@@ -3,7 +3,15 @@ from rest_framework import serializers
 from .models import UserData, Country, State, City, Question, Answer, ParentData, SourceInfo, Programs
 
 
+class ParentDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParentData
+        fields = ("parent", "name", "phone", "email")
+
+
 class UserDataSerializer(serializers.ModelSerializer):
+    Data = ParentDataSerializer()
+
     class Meta:
         model = UserData
         fields = "__all__"
@@ -36,12 +44,6 @@ class StateSerializer(serializers.ModelSerializer):
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
-        fields = "__all__"
-
-
-class ParentDataSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ParentData
         fields = "__all__"
 
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from rest_framework import generics
-
+from rest_framework.views import APIView, Request, Response
 from .models import UserData, Country, State,City, Question, Answer, ParentData, SourceInfo, Programs
 from .serializers import UserDataSerializer, CountrySerializer, StateSerializer, CitySerializer, \
     QuestionSerializer, AnswerSerializer, ParentDataSerializer, SourceInfoSerializer, ProgramsSerializer
@@ -15,6 +15,23 @@ class UserDataList(generics.ListCreateAPIView):
 
     queryset = UserData.objects.all()
     serializer_class = UserDataSerializer
+
+    def get(self, Request):
+        if UserData.parent:
+            objmodelquery = ParentData.objects.all()
+            parentdatarray = list()
+            for parent in objmodelquery:
+                print(parent.parent)
+                parentdatarray.append({
+                    "parent": parent.parent,
+                    "name": parent.name,
+                    "phone": parent.phone,
+                    "email": parent.email,
+                })
+                data = parentdatarray
+            return Response(data)
+        else:
+            return Response(UserData)
 
 
 class QuestionList(generics.ListCreateAPIView):
@@ -83,3 +100,6 @@ class ProgramList(generics.ListCreateAPIView):
     """
     queryset = Programs.objects.all()
     serializer_class = ProgramsSerializer
+
+
+
